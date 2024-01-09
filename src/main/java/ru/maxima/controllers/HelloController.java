@@ -1,11 +1,15 @@
 package ru.maxima.controllers;
 
+import javassist.runtime.Inner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class HelloController {
@@ -39,7 +43,32 @@ public class HelloController {
         System.out.println("You are inside");
         return "hello";
     }
+    @GetMapping("/calculator")
+    public String Calculator(@RequestParam (value = "x")Double x,
+                             @RequestParam(value = "y")Double y,
+                             @RequestParam(value = "value") String value,
+                             @PathVariable
+                             Model model){
 
+
+        Double sum = 0.0;
+        switch (value){
+            case "+":
+                sum = x + y;
+                break;
+            case "-":
+                sum = x - y;
+                break;
+            case "/":
+                sum = x / y;
+                break;
+            case "*":
+                sum = x * y;
+                break;
+        }
+        model.addAttribute("value", String.valueOf(value));
+        return "calculator";
+    }
 
 
 
