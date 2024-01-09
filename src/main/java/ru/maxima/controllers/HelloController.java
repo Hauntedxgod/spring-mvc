@@ -66,7 +66,7 @@ public class HelloController {
                 sum = x * y;
                 break;
         }
-        model.addAttribute("value", " " + sum);
+        model.addAttribute("sum", " " + sum);
         return "calculator";
     }
 
