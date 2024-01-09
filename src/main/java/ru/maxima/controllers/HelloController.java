@@ -51,7 +51,7 @@ public class HelloController {
                              Model model){
 
 
-        Double sum = 0.0;
+        double sum = 0.0;
         switch (value){
             case "+":
                 sum = x + y;
