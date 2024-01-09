@@ -66,7 +66,7 @@ public class HelloController {
                 sum = x * y;
                 break;
         }
-        model.addAttribute("value", String.valueOf(value));
+        model.addAttribute("value", " " + value);
         return "calculator";
     }
 
