@@ -1,26 +1,26 @@
-package ru.maxima.controllers;
-
-import javassist.runtime.Inner;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.List;
-
-@Controller
-public class HelloController {
-
-    // @PostMapping - принимает
-    // CRUD - create read update delete
-    // @GetMapping - read
-    // @PutMapping - update
-    // @PatchMapping - update
-    // @DeleteMapping - delete
-
+//package ru.maxima.controllers;
+//
+//import javassist.runtime.Inner;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.RequestParam;
+//
+//import javax.servlet.http.HttpServletRequest;
+//import java.util.Arrays;
+//import java.util.List;
+//
+//@Controller
+//public class HelloController {
+//
+////     @PostMapping - принимает
+////     CRUD - create read update delete
+////     @GetMapping - read
+////     @PutMapping - update
+////     @PatchMapping - update
+////     @DeleteMapping - delete
+//
 //    @GetMapping("/old-hello-world")
 //    public String oldSayHello(HttpServletRequest request,
 //                              Model model){
@@ -60,4 +60,4 @@ public class HelloController {
 //    public String sayFamily(){
 //        return "relatives";
 //    }
-}
+//}
