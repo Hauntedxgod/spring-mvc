@@ -48,7 +48,6 @@ public class PeopleController {
         if (binding.hasErrors()){
             return "view-to-create-new-person";
         }
-
         personDAO.save(person);
         return "redirect:/people";
     }

@@ -64,9 +64,10 @@ public class PersonDAO {
     public Person findById(Long id) {
         Person person = null;
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "select * from person where id = " + id;
-            ResultSet resultSet = statement.executeQuery(SQL);
+
+            PreparedStatement prepareStatement = connection.prepareStatement("select * from person where id = ? ");
+            prepareStatement.setLong(1 , id);
+            ResultSet resultSet = prepareStatement.executeQuery();
 
             while(resultSet.next()){
                 new Person();
@@ -82,18 +83,17 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        Person personWithMaxId = getAllPeople().stream().max(Comparator.comparing(Person::getId))
-                .orElseThrow(NoSuchFieldError::new);
-        Long nextId = (long) (personWithMaxId.getId() + 1);
+//        Person personWithMaxId = getAllPeople().stream().max(Comparator.comparing(Person::getId))
+//                .orElseThrow(NoSuchFieldError::new);
+//        Long nextId = (long) (personWithMaxId.getId() + 1);
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "insert into person(id , name , age , email) values (" +
-                    nextId + ",'" +
-                    person.getName() + "'," +
-                    person.getAge() + ",'" +
-                    person.getEmail() + "'" +
-                    ")" ;
-             statement.executeUpdate(SQL);
+            PreparedStatement prepareStatement = connection.prepareStatement
+                    ("insert into person( name , age, email) values (? , ?, ?)");
+            prepareStatement.setString(1 , person.getName());
+            prepareStatement.setInt(2 , person.getAge());
+            prepareStatement.setString(3 , person.getEmail());
+            prepareStatement.executeUpdate();
+
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -101,12 +101,13 @@ public class PersonDAO {
 
     public void update(Long id, Person editedPerson) {
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "update person" + " set name = '" + editedPerson.getName() + "'" +
-                    ", age = " + editedPerson.getAge() +
-                    ", email = '" + editedPerson.getEmail() + "'" +
-                    "  where id = " + id  ;
-            statement.executeUpdate(SQL);
+            PreparedStatement prepareStatement = connection.prepareStatement
+                    ("update person " + " set name= ? , set age = ? , set email = ? "  + "Where id = ?");
+            prepareStatement.setString(1 , editedPerson.getName());
+            prepareStatement.setInt(2 , editedPerson.getAge());
+            prepareStatement.setString(3 , editedPerson.getEmail());
+            prepareStatement.setLong(4 , id);
+            prepareStatement.executeUpdate();
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -115,9 +116,10 @@ public class PersonDAO {
 
     public void deleteById(Long id) {
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "delete from person where id = " + id ;
-            statement.executeUpdate(SQL);
+            PreparedStatement prepareStatement = connection.prepareStatement
+                    ("delete from person  where id = ?");
+            prepareStatement.setLong(1 , id );
+            prepareStatement.executeUpdate();
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
