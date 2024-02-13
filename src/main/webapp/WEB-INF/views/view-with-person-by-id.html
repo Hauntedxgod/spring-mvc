@@ -9,7 +9,7 @@
 
 <p align="center" th:text="${personById.getName()}"></p>
 <p align="center" th:text="${personById.getAge()}"></p>
-<p align="center" th:text="${personById.getSurname()}"></p>
+<p align="center" th:text="${personById.getEmail()}"></p>
 
 <a th:href="@{/people/{id}/edit(id=${personById.getId()})}">Edit this person</a>
 
